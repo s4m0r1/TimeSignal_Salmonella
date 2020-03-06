@@ -21,7 +21,7 @@
     "cwd": "${workspaceFolder}",
     "program": "${workspaceFolder}/${fileBasenameNoExtension}.js",
     "outFiles": [
-      "${workspaceFolder}/${ fileBasename}.js"
+      "${workspaceFolder}/${fileBasename}.js"
     ]
   }
 ]
