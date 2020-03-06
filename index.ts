@@ -14,18 +14,20 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`)
 })
 
-client.on('message', async (msg: Discord.Message) => {
-    if (msg.content !== '/jiho') return
-    if (msg.member === null) return
-
-    if (msg.member.voice.channel) {
-        const connect = await msg.member.voice.channel.join()
-        const dispatcher = connect.play('http://owncloud.s4m0r1.me/index.php/s/mB5RDpXdE9CaHey/download', { volume: 0.2 })
-        dispatcher.on('finish', () => connect.disconnect())
-    } else {
-        msg.reply('ボイスチャンネルに入ってください☆')
+client.on("voiceStateUpdate", async (oldstate: Discord.VoiceState, newstate: Discord.VoiceState) => {
+    if(newstate.member === null) return
+    if(newstate.member.voice.channel === null) return
+    if(newstate.member.user.bot) return
+    if(newstate.member.joinedAt) {
+        const connect = await newstate.member.voice.channel.join()
+        cron.schedule('0 0 0 * * *', () => {
+            const dispatcher = connect.play('http://owncloud.s4m0r1.me/index.php/s/mB5RDpXdE9CaHey/download', { volume: 0.2 })
+            dispatcher.on('finish', () => connect.disconnect())
+        }, {
+            scheduled: true,
+            timezone: "Asia/Tokyo"
+        });
     }
 })
-
 
 client.login(process.env.DISCORD_TOKEN)
