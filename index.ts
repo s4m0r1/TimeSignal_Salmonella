@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 import * as cron from 'node-cron'
 
 // setting
-const client: Discord.Client = new Discord.Client()
+const client = new Discord.Client()
 dotenv.config()
 
 // Login message
