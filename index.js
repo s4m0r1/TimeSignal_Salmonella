@@ -92,4 +92,4 @@ client.on('message', function (msg) { return __awaiter(void 0, void 0, void 0, f
         return [2];
     });
 }); });
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN); // tslint:disable-next-line:no-console
