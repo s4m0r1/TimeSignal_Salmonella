@@ -35,47 +35,61 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 exports.__esModule = true;
-var Discord = require("discord.js");
-var dotenv = require("dotenv");
-var cron = require("node-cron");
-// setting
+var Discord = __importStar(require("discord.js"));
+var dotenv = __importStar(require("dotenv"));
+var cron = __importStar(require("node-cron"));
 var client = new Discord.Client();
 dotenv.config();
-// Login message
-client.on('ready', function () {
-    if (client.user === null)
-        return;
-    // tslint:disable-next-line:no-console
-    console.log("Logged in as " + client.user.tag + "!");
-});
-client.on("voiceStateUpdate", function (oldstate, newstate) { return __awaiter(void 0, void 0, void 0, function () {
-    var connect_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                if (newstate.member === null)
-                    return [2 /*return*/];
-                if (newstate.member.voice.channel === null)
-                    return [2 /*return*/];
-                if (newstate.member.user.bot)
-                    return [2 /*return*/];
-                if (!newstate.member.joinedAt) return [3 /*break*/, 2];
-                return [4 /*yield*/, newstate.member.voice.channel.join()];
+client.on('ready', function () { var _a; return console.log("Logged in as " + ((_a = client.user) === null || _a === void 0 ? void 0 : _a.tag) + "!"); });
+var soundPlay = function (member, url, volume) { return __awaiter(void 0, void 0, void 0, function () {
+    var connect, dispatcher;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0: return [4, ((_a = member === null || member === void 0 ? void 0 : member.voice.channel) === null || _a === void 0 ? void 0 : _a.join())];
             case 1:
-                connect_1 = _a.sent();
-                cron.schedule('0 0 * * * ', function () {
-                    var dispatcher = connect_1.play('http://owncloud.s4m0r1.me/index.php/s/mB5RDpXdE9CaHey/download', { volume: 0.2 });
-                    //  tslint:disable-next-line:no-console
-                    console.log('TimeSignal at 24');
-                    dispatcher.on('finish', function () { return connect_1.disconnect(); });
-                }, {
-                    scheduled: true,
-                    timezone: "Asia/Tokyo"
-                });
-                _a.label = 2;
-            case 2: return [2 /*return*/];
+                connect = _b.sent();
+                dispatcher = connect === null || connect === void 0 ? void 0 : connect.play(url, { volume: volume });
+                dispatcher === null || dispatcher === void 0 ? void 0 : dispatcher.on('finish', function () { return connect === null || connect === void 0 ? void 0 : connect.disconnect(); });
+                return [2];
         }
+    });
+}); };
+client.on('voiceStateUpdate', function (_, state) {
+    var _a;
+    if (!((_a = state.member) === null || _a === void 0 ? void 0 : _a.joinedAt))
+        return;
+    console.log('voiceStateUpdate');
+    cron.schedule('30 * * * * * ', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var url;
+        return __generator(this, function (_a) {
+            url = 'http://owncloud.s4m0r1.me/index.php/s/mB5RDpXdE9CaHey/download';
+            soundPlay(state.member, url, 0.2);
+            console.log('TimeSignal at 24');
+            return [2];
+        });
+    }); }, {
+        scheduled: true,
+        timezone: 'Asia/Tokyo'
+    });
+});
+client.on('message', function (msg) { return __awaiter(void 0, void 0, void 0, function () {
+    var url;
+    return __generator(this, function (_a) {
+        console.log('message');
+        if (msg.content !== '/almage')
+            return [2];
+        url = 'https://owncloud.s4m0r1.me/index.php/s/Qm7r7qdZXJEDbsy/download';
+        soundPlay(msg.member, url, 0.3);
+        return [2];
     });
 }); });
 client.login(process.env.DISCORD_TOKEN);
