@@ -18,7 +18,6 @@ client.on('ready', () => console.log(`Logged in as ${client.user?.tag}!`))
 client.on('voiceStateUpdate', (_: Discord.VoiceState, state: Discord.VoiceState) => {
   if (!state.member?.joinedAt) return
 
-  // prettier-ignore
   cron.schedule('0 0 * * * ', async () => {
     const url = 'http://owncloud.s4m0r1.me/index.php/s/mB5RDpXdE9CaHey/download'
     soundPlay(state.member, url, 0.2)
