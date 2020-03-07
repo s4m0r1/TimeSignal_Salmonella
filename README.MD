@@ -1,14 +1,17 @@
-# Discordで時報を鳴らしてみるテスト
+# Discord.js_study
 
-## やったこと
+## できること
 
-Discord.jsを使ってボイスチャットに入り特定の音声を流す
 Cronをつかって毎日24時に時報を流せるようにする
 
 ## install
 
 `npm i`
 
-## run
+## build
 
-`node index.js`
+`npm run build`
+
+##  start 
+
+`npm start`
