@@ -8,16 +8,13 @@ dotenv.config()
 
 // Login message
 client.on('ready', () => {
-    if (client.user === null) return
-
     // tslint:disable-next-line:no-console
-    console.log(`Logged in as ${client.user.tag}!`)
+    console.log(`Logged in as ${client.user?.tag}!`)
 })
 
 client.on("voiceStateUpdate", async (oldstate: Discord.VoiceState, newstate: Discord.VoiceState) => {
-    if(newstate.member === null) return
+    if(newstate.member === null) return// tslint:disable-next-line:no-console
     if(newstate.member.voice.channel === null) return
-    if(newstate.member.user.bot) return
     if(newstate.member.joinedAt) {
         const connect = await newstate.member.voice.channel.join()
         cron.schedule('0 0 * * * ', () => {
@@ -32,4 +29,4 @@ client.on("voiceStateUpdate", async (oldstate: Discord.VoiceState, newstate: Dis
     }
 })
 
-client.login(process.env.DISCORD_TOKEN)
+client.login(process.env.DISCORD_TOKEN)// tslint:disable-next-line:no-console

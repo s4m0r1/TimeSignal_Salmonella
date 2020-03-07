@@ -44,10 +44,9 @@ var client = new Discord.Client();
 dotenv.config();
 // Login message
 client.on('ready', function () {
-    if (client.user === null)
-        return;
+    var _a;
     // tslint:disable-next-line:no-console
-    console.log("Logged in as " + client.user.tag + "!");
+    console.log("Logged in as " + ((_a = client.user) === null || _a === void 0 ? void 0 : _a.tag) + "!");
 });
 client.on("voiceStateUpdate", function (oldstate, newstate) { return __awaiter(void 0, void 0, void 0, function () {
     var connect_1;
@@ -55,10 +54,8 @@ client.on("voiceStateUpdate", function (oldstate, newstate) { return __awaiter(v
         switch (_a.label) {
             case 0:
                 if (newstate.member === null)
-                    return [2 /*return*/];
+                    return [2 /*return*/]; // tslint:disable-next-line:no-console
                 if (newstate.member.voice.channel === null)
-                    return [2 /*return*/];
-                if (newstate.member.user.bot)
                     return [2 /*return*/];
                 if (!newstate.member.joinedAt) return [3 /*break*/, 2];
                 return [4 /*yield*/, newstate.member.voice.channel.join()];
@@ -78,4 +75,4 @@ client.on("voiceStateUpdate", function (oldstate, newstate) { return __awaiter(v
         }
     });
 }); });
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN); // tslint:disable-next-line:no-console
