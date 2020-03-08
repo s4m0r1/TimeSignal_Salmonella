@@ -2,7 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p ./tsconfig.json",
     "start": "node index.js",
     "cal": "node ./src/cal.js"
   },
