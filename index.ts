@@ -29,12 +29,4 @@ client.on('voiceStateUpdate', (_: Discord.VoiceState, state: Discord.VoiceState)
   })
 })
 
-client.on('message', async (msg: Discord.Message) => {
-  if (msg.content !== '/almage') return
-
-  const url = 'https://owncloud.s4m0r1.me/index.php/s/Qm7r7qdZXJEDbsy/download'
-  soundPlay(msg.member, url, 0.3)
-  console.log('almage')
-})
-
 client.login(process.env.DISCORD_TOKEN)
