@@ -3,7 +3,8 @@
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "build": "tsc",
-    "start": "node index.js"
+    "start": "node index.js",
+    "cal": "node ./src/cal.js"
   },
   "engines": {
     "node": "8"

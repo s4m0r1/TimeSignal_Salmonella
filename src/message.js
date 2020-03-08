@@ -35,60 +35,98 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 exports.__esModule = true;
-var Discord = __importStar(require("discord.js"));
-var dotenv = __importStar(require("dotenv"));
-var cron = __importStar(require("node-cron"));
-var client = new Discord.Client();
-dotenv.config();
 var soundPlay = function (member, url, volume) { return __awaiter(void 0, void 0, void 0, function () {
-    var connect, dispatcher;
+    var connect;
     var _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0: return [4, ((_a = member === null || member === void 0 ? void 0 : member.voice.channel) === null || _a === void 0 ? void 0 : _a.join())];
             case 1:
                 connect = _b.sent();
-                dispatcher = connect === null || connect === void 0 ? void 0 : connect.play(url, { volume: volume });
-                dispatcher === null || dispatcher === void 0 ? void 0 : dispatcher.on('finish', function () { return connect === null || connect === void 0 ? void 0 : connect.disconnect(); });
+                connect === null || connect === void 0 ? void 0 : connect.play(url, { volume: volume });
                 return [2];
         }
     });
 }); };
-client.on('ready', function () { var _a; return console.log("Logged in as " + ((_a = client.user) === null || _a === void 0 ? void 0 : _a.tag) + "!"); });
-client.on('voiceStateUpdate', function (_, state) {
+var reply = 'あんたがボイスチャンネルに入ってないと喋れないじゃないの！';
+exports.almage = function (msg) {
     var _a;
-    if (!((_a = state.member) === null || _a === void 0 ? void 0 : _a.joinedAt))
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
+        msg.reply(reply);
         return;
-    cron.schedule('0 0 * * * ', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var url;
-        return __generator(this, function (_a) {
-            url = 'http://owncloud.s4m0r1.me/index.php/s/mB5RDpXdE9CaHey/download';
-            soundPlay(state.member, url, 0.2);
-            console.log('TimeSignal at 24');
-            return [2];
-        });
-    }); }, {
-        scheduled: true,
-        timezone: 'Asia/Tokyo'
-    });
-});
-client.on('message', function (msg) { return __awaiter(void 0, void 0, void 0, function () {
-    var url;
-    return __generator(this, function (_a) {
-        if (msg.content !== '/almage')
-            return [2];
-        url = 'https://owncloud.s4m0r1.me/index.php/s/Qm7r7qdZXJEDbsy/download';
-        soundPlay(msg.member, url, 0.3);
-        console.log('almage');
-        return [2];
-    });
-}); });
-client.login(process.env.DISCORD_TOKEN);
+    }
+    var url = 'https://owncloud.s4m0r1.me/index.php/s/Qm7r7qdZXJEDbsy/download';
+    soundPlay(msg.member, url, 0.5);
+    console.log('almage');
+};
+exports.yabai = function (msg) {
+    var _a;
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
+        msg.reply(reply);
+        return;
+    }
+    var url = 'https://owncloud.s4m0r1.me/index.php/s/TgQLRPNxXbtRXz2/download';
+    soundPlay(msg.member, url, 0.3);
+    console.log('yabai');
+};
+exports.yabaiwayo = function (msg) {
+    var _a;
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
+        msg.reply(reply);
+        return;
+    }
+    var url = 'http://owncloud.s4m0r1.me/index.php/s/WyLnZa3y4LS9er9/download';
+    soundPlay(msg.member, url, 0.3);
+    console.log('yabaiwayo');
+};
+exports.yabaidesu = function (msg) {
+    var _a;
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
+        msg.reply(reply);
+        return;
+    }
+    var url = 'http://owncloud.s4m0r1.me/index.php/s/gA4yMyTpJ6wYLra/download';
+    soundPlay(msg.member, url, 0.3);
+    console.log('yabaidesu');
+};
+exports.yabayaba = function (msg) {
+    var _a;
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
+        msg.reply(reply);
+        return;
+    }
+    var url = 'http://owncloud.s4m0r1.me/index.php/s/cHbAwR6DJ8Zy53E/download';
+    soundPlay(msg.member, url, 0.3);
+    console.log('yabayabai');
+};
+exports.yabayabai = function (msg) {
+    var _a;
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
+        msg.reply(reply);
+        return;
+    }
+    var url = 'http://owncloud.s4m0r1.me/index.php/s/BBbBtPz2WcLRjgY/download';
+    soundPlay(msg.member, url, 0.3);
+    console.log('yabayabai');
+};
+exports.yabaislow = function (msg) {
+    var _a;
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
+        msg.reply(reply);
+        return;
+    }
+    var url = 'http://owncloud.s4m0r1.me/index.php/s/3FTLEWHXP6yjScp/download';
+    soundPlay(msg.member, url, 0.3);
+    console.log('yabayabai');
+};
+exports.yabaiotwr = function (msg) {
+    var _a;
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
+        msg.reply(reply);
+        return;
+    }
+    var url = 'http://owncloud.s4m0r1.me/index.php/s/eJX8Ax98SGyQGAy/download';
+    soundPlay(msg.member, url, 0.3);
+    console.log('yabayabai');
+};

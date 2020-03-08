@@ -45,50 +45,61 @@ var __importStar = (this && this.__importStar) || function (mod) {
 exports.__esModule = true;
 var Discord = __importStar(require("discord.js"));
 var dotenv = __importStar(require("dotenv"));
-var cron = __importStar(require("node-cron"));
+var message_1 = require("./message");
+var DevMode = false;
 var client = new Discord.Client();
 dotenv.config();
-var soundPlay = function (member, url, volume) { return __awaiter(void 0, void 0, void 0, function () {
-    var connect, dispatcher;
-    var _a;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0: return [4, ((_a = member === null || member === void 0 ? void 0 : member.voice.channel) === null || _a === void 0 ? void 0 : _a.join())];
+client.on('ready', function () { var _a; return console.log("Logged in as " + ((_a = client.user) === null || _a === void 0 ? void 0 : _a.tag) + "!"); });
+client.on('voiceStateUpdate', function (_, state) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, _b, _c;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                if (!((_a = state.member) === null || _a === void 0 ? void 0 : _a.joinedAt))
+                    return [2];
+                return [4, ((_c = (_b = state.member) === null || _b === void 0 ? void 0 : _b.voice.channel) === null || _c === void 0 ? void 0 : _c.join())];
             case 1:
-                connect = _b.sent();
-                dispatcher = connect === null || connect === void 0 ? void 0 : connect.play(url, { volume: volume });
-                dispatcher === null || dispatcher === void 0 ? void 0 : dispatcher.on('finish', function () { return connect === null || connect === void 0 ? void 0 : connect.disconnect(); });
+                _d.sent();
                 return [2];
         }
     });
-}); };
-client.on('ready', function () { var _a; return console.log("Logged in as " + ((_a = client.user) === null || _a === void 0 ? void 0 : _a.tag) + "!"); });
-client.on('voiceStateUpdate', function (_, state) {
-    var _a;
-    if (!((_a = state.member) === null || _a === void 0 ? void 0 : _a.joinedAt))
-        return;
-    cron.schedule('0 0 * * * ', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var url;
-        return __generator(this, function (_a) {
-            url = 'http://owncloud.s4m0r1.me/index.php/s/mB5RDpXdE9CaHey/download';
-            soundPlay(state.member, url, 0.2);
-            console.log('TimeSignal at 24');
-            return [2];
-        });
-    }); }, {
-        scheduled: true,
-        timezone: 'Asia/Tokyo'
-    });
-});
+}); });
 client.on('message', function (msg) { return __awaiter(void 0, void 0, void 0, function () {
-    var url;
     return __generator(this, function (_a) {
-        if (msg.content !== '/almage')
+        if (msg.content === '/yabai=DevMode') {
+            DevMode = !DevMode;
+            msg.reply(DevMode ? 'DevModeになったわよ！' : 'DevModeを解除したわ');
+            console.log('Switch DevMode');
             return [2];
-        url = 'https://owncloud.s4m0r1.me/index.php/s/Qm7r7qdZXJEDbsy/download';
-        soundPlay(msg.member, url, 0.3);
-        console.log('almage');
+        }
+        switch (msg.content) {
+            case '/almage':
+                return [2, message_1.almage(msg)];
+            case '/yabai':
+            case '/yab':
+                return [2, message_1.yabai(msg)];
+            case '/yabaiwayo':
+            case '/yabw':
+                return [2, message_1.yabaiwayo(msg)];
+            case '/yabaidesu':
+            case '/yabd':
+                return [2, message_1.yabaidesu(msg)];
+            case '/yabayaba':
+            case '/yaby':
+                return [2, message_1.yabayaba(msg)];
+        }
+        if (!DevMode)
+            return [2];
+        switch (msg.content) {
+            case '/yabayabai':
+            case '/yabaiyabai':
+                return [2, message_1.yabayabai(msg)];
+            case '/yabaislow':
+                return [2, message_1.yabaislow(msg)];
+            case '/yabaiotwr':
+                return [2, message_1.yabaiotwr(msg)];
+        }
         return [2];
     });
 }); });
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.CAL_TOKEN);

@@ -13,5 +13,5 @@
     "downlevelIteration": true,
     "allowJs": true,
   },
-  "files": ["index.ts"]
+  "files": ["index.ts", "src/cal.ts", "src/message.ts"]
 }
