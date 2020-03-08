@@ -45,8 +45,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 exports.__esModule = true;
 var Discord = __importStar(require("discord.js"));
 var dotenv = __importStar(require("dotenv"));
+var status_1 = require("./status");
 var message_1 = require("./message");
-var DevMode = false;
+var status = {
+    Mode: false,
+    Volume: 0.3
+};
 var client = new Discord.Client();
 dotenv.config();
 client.on('ready', function () { var _a; return console.log("Logged in as " + ((_a = client.user) === null || _a === void 0 ? void 0 : _a.tag) + "!"); });
@@ -66,38 +70,42 @@ client.on('voiceStateUpdate', function (_, state) { return __awaiter(void 0, voi
 }); });
 client.on('message', function (msg) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        if (msg.content === '/yabai=DevMode') {
-            DevMode = !DevMode;
-            msg.reply(DevMode ? 'DevModeになったわよ！' : 'DevModeを解除したわ');
-            console.log('Switch DevMode');
-            return [2];
+        switch (msg.content) {
+            case '/cal':
+                return [2, status_1.calStatus(msg, status)];
+            case '/cal=up':
+                return [2, (status.Volume = status_1.volumeUp(msg, status.Volume))];
+            case '/cal=down':
+                return [2, (status.Volume = status_1.volumeDown(msg, status.Volume))];
+            case '/cal=mode':
+                return [2, (status.Mode = status_1.switchMode(msg, status.Mode))];
         }
         switch (msg.content) {
-            case '/almage':
-                return [2, message_1.almage(msg)];
             case '/yabai':
             case '/yab':
-                return [2, message_1.yabai(msg)];
+                return [2, message_1.yabai(msg, status.Volume)];
             case '/yabaiwayo':
             case '/yabw':
-                return [2, message_1.yabaiwayo(msg)];
+                return [2, message_1.yabaiwayo(msg, status.Volume)];
             case '/yabaidesu':
             case '/yabd':
-                return [2, message_1.yabaidesu(msg)];
+                return [2, message_1.yabaidesu(msg, status.Volume)];
             case '/yabayaba':
             case '/yaby':
-                return [2, message_1.yabayaba(msg)];
+                return [2, message_1.yabayaba(msg, status.Volume)];
         }
-        if (!DevMode)
+        if (!status.Mode)
             return [2];
         switch (msg.content) {
             case '/yabayabai':
             case '/yabaiyabai':
-                return [2, message_1.yabayabai(msg)];
+                return [2, message_1.yabayabai(msg, status.Volume)];
             case '/yabaislow':
-                return [2, message_1.yabaislow(msg)];
+                return [2, message_1.yabaislow(msg, status.Volume)];
             case '/yabaiotwr':
-                return [2, message_1.yabaiotwr(msg)];
+                return [2, message_1.yabaiotwr(msg, status.Volume)];
+            case '/almage':
+                return [2, message_1.almage(msg, status.Volume)];
         }
         return [2];
     });

@@ -7,11 +7,11 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
     "allowJs": true,
   },
-  "files": ["index.ts", "src/cal.ts", "src/message.ts"]
+  "files": ["index.ts", "src/cal.ts", "src/type.ts", "src/message.ts", "src/status.ts"]
 }

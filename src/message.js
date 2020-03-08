@@ -35,7 +35,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 exports.__esModule = true;
+var dotenv = __importStar(require("dotenv"));
+dotenv.config();
 var soundPlay = function (member, url, volume) { return __awaiter(void 0, void 0, void 0, function () {
     var connect;
     var _a;
@@ -50,83 +59,59 @@ var soundPlay = function (member, url, volume) { return __awaiter(void 0, void 0
     });
 }); };
 var reply = 'あんたがボイスチャンネルに入ってないと喋れないじゃないの！';
-exports.almage = function (msg) {
+exports.yabai = function (msg, volume) {
     var _a;
-    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
-        msg.reply(reply);
-        return;
-    }
-    var url = 'https://owncloud.s4m0r1.me/index.php/s/Qm7r7qdZXJEDbsy/download';
-    soundPlay(msg.member, url, 0.5);
-    console.log('almage');
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+        return msg.reply(reply);
+    soundPlay(msg.member, process.env.URL_YABAI, volume);
+    console.log('sound yabai');
 };
-exports.yabai = function (msg) {
+exports.yabaiwayo = function (msg, volume) {
     var _a;
-    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
-        msg.reply(reply);
-        return;
-    }
-    var url = 'https://owncloud.s4m0r1.me/index.php/s/TgQLRPNxXbtRXz2/download';
-    soundPlay(msg.member, url, 0.3);
-    console.log('yabai');
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+        return msg.reply(reply);
+    soundPlay(msg.member, process.env.URL_YABAIWAYO, volume);
+    console.log('sound yabaiwayo');
 };
-exports.yabaiwayo = function (msg) {
+exports.yabaidesu = function (msg, volume) {
     var _a;
-    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
-        msg.reply(reply);
-        return;
-    }
-    var url = 'http://owncloud.s4m0r1.me/index.php/s/WyLnZa3y4LS9er9/download';
-    soundPlay(msg.member, url, 0.3);
-    console.log('yabaiwayo');
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+        return msg.reply(reply);
+    soundPlay(msg.member, process.env.URL_YABAIDESU, volume);
+    console.log('sound yabaidesu');
 };
-exports.yabaidesu = function (msg) {
+exports.yabayaba = function (msg, volume) {
     var _a;
-    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
-        msg.reply(reply);
-        return;
-    }
-    var url = 'http://owncloud.s4m0r1.me/index.php/s/gA4yMyTpJ6wYLra/download';
-    soundPlay(msg.member, url, 0.3);
-    console.log('yabaidesu');
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+        return msg.reply(reply);
+    soundPlay(msg.member, process.env.URL_YABAYABA, volume);
+    console.log('sound yabayabai');
 };
-exports.yabayaba = function (msg) {
+exports.yabayabai = function (msg, volume) {
     var _a;
-    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
-        msg.reply(reply);
-        return;
-    }
-    var url = 'http://owncloud.s4m0r1.me/index.php/s/cHbAwR6DJ8Zy53E/download';
-    soundPlay(msg.member, url, 0.3);
-    console.log('yabayabai');
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+        return msg.reply(reply);
+    soundPlay(msg.member, process.env.URL_YABAYABAI, volume);
+    console.log('sound yabayabai');
 };
-exports.yabayabai = function (msg) {
+exports.yabaislow = function (msg, volume) {
     var _a;
-    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
-        msg.reply(reply);
-        return;
-    }
-    var url = 'http://owncloud.s4m0r1.me/index.php/s/BBbBtPz2WcLRjgY/download';
-    soundPlay(msg.member, url, 0.3);
-    console.log('yabayabai');
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+        return msg.reply(reply);
+    soundPlay(msg.member, process.env.URL_YABAISLOW, volume);
+    console.log('sound yabayabai');
 };
-exports.yabaislow = function (msg) {
+exports.yabaiotwr = function (msg, volume) {
     var _a;
-    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
-        msg.reply(reply);
-        return;
-    }
-    var url = 'http://owncloud.s4m0r1.me/index.php/s/3FTLEWHXP6yjScp/download';
-    soundPlay(msg.member, url, 0.3);
-    console.log('yabayabai');
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+        return msg.reply(reply);
+    soundPlay(msg.member, process.env.URL_YABAIOTWR, volume);
+    console.log('sound yabayabai');
 };
-exports.yabaiotwr = function (msg) {
+exports.almage = function (msg, volume) {
     var _a;
-    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel)) {
-        msg.reply(reply);
-        return;
-    }
-    var url = 'http://owncloud.s4m0r1.me/index.php/s/eJX8Ax98SGyQGAy/download';
-    soundPlay(msg.member, url, 0.3);
-    console.log('yabayabai');
+    if (!((_a = msg.member) === null || _a === void 0 ? void 0 : _a.voice.channel))
+        return msg.reply(reply);
+    soundPlay(msg.member, process.env.URL_ALMAGE, volume);
+    console.log('sound almage');
 };

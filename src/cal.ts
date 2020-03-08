@@ -1,7 +1,8 @@
 import * as Discord from 'discord.js'
 import * as dotenv from 'dotenv'
+import {Status} from './type'
+import {calStatus, volumeUp, volumeDown, switchMode} from './status'
 import {
-  almage,
   yabai,
   yabaiwayo,
   yabaidesu,
@@ -9,10 +10,11 @@ import {
   yabayabai,
   yabaislow,
   yabaiotwr,
+  almage,
 } from './message'
 
-const status = {
-  DevMode: false,
+const status: Status = {
+  Mode: false,
   Volume: 0.3,
 }
 
@@ -27,42 +29,41 @@ client.on('voiceStateUpdate', async (_: Discord.VoiceState, state: Discord.Voice
 })
 
 client.on('message', async (msg: Discord.Message) => {
-  if (msg.content === '/yabai=DevMode') {
-    status.DevMode = !status.DevMode
-    msg.reply(status.DevMode ? 'DevModeになったわよ！' : 'DevModeを解除したわ')
-    console.log('Switch DevMode')
-    return
-  }
-
   switch (msg.content) {
-    case '/yabai=up':
-    case '/yabai=down':
+    case '/cal':
+      return calStatus(msg, status)
+    case '/cal=up':
+      return (status.Volume = volumeUp(msg, status.Volume))
+    case '/cal=down':
+      return (status.Volume = volumeDown(msg, status.Volume))
+    case '/cal=mode':
+      return (status.Mode = switchMode(msg, status.Mode))
   }
 
   // prettier-ignore
   switch (msg.content) {
-    case '/almage':
-      return almage(msg)
     case '/yabai': case '/yab':
-      return yabai(msg)
+      return yabai(msg, status.Volume)
     case '/yabaiwayo': case '/yabw':
-      return yabaiwayo(msg)
+      return yabaiwayo(msg, status.Volume)
     case '/yabaidesu': case '/yabd':
-      return yabaidesu(msg)
+      return yabaidesu(msg, status.Volume)
     case '/yabayaba': case '/yaby':
-      return yabayaba(msg)
+      return yabayaba(msg, status.Volume)
   }
 
-  if (!status.DevMode) return
+  if (!status.Mode) return
 
+  // prettier-ignore
   switch (msg.content) {
-    case '/yabayabai':
-    case '/yabaiyabai':
-      return yabayabai(msg)
+    case '/yabayabai': case '/yabaiyabai':
+      return yabayabai(msg, status.Volume)
     case '/yabaislow':
-      return yabaislow(msg)
+      return yabaislow(msg, status.Volume)
     case '/yabaiotwr':
-      return yabaiotwr(msg)
+      return yabaiotwr(msg, status.Volume)
+    case '/almage':
+      return almage(msg, status.Volume)
   }
 })
 
