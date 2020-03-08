@@ -1,0 +1,9 @@
+version: '2'
+services: 
+    app:
+        build:
+            context:  .
+            dockerfile: ./dockerfile
+        command: npm start
+        volumes: 
+            - .:/app
