@@ -4,6 +4,7 @@ services:
         build:
             context:  .
             dockerfile: ./dockerfile
+        working_dir: /app
         command: npm start
         volumes: 
             - .:/app
